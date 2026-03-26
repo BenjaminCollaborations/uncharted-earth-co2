@@ -921,14 +921,19 @@
   .team-divider-label::before { content: '—'; }
 
   /* RESPONSIVE */
+  /* ── TABLET ── */
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
+    .nav-links { gap: 20px; }
+    .nav-links a { font-size: 10px; }
     .hero { padding: 0 24px 60px; }
     .section-inner { padding: 0 24px; }
     .thesis-layout { grid-template-columns: 1fr; gap: 40px; }
     .thesis-left { position: static; }
     .diff-grid { grid-template-columns: 1fr; }
-    .host-layout { grid-template-columns: 1fr; }
+    .diff-header { flex-direction: column !important; gap: 32px !important; }
+    .diff-header > div:last-child { flex: 1 1 100% !important; width: 100% !important; }
+    .host-layout { grid-template-columns: 1fr; gap: 48px; }
     .host-right { position: static; }
     .oceanco-facts { grid-template-columns: repeat(2,1fr); }
     .oceanco-pillars { grid-template-columns: 1fr; }
@@ -937,9 +942,7 @@
     .board-grid-bottom { grid-template-columns: 1fr; }
     .roadmap-phases { grid-template-columns: 1fr 1fr; gap: 40px; }
     .roadmap-line { display: none; }
-    .distrib-grid { grid-template-columns: 1fr; }
-    .diff-header { flex-direction: column !important; }
-    .diff-header > div:last-child { flex: 1 1 100% !important; width: 100% !important; }
+    .distrib-grid { grid-template-columns: repeat(2,1fr) !important; }
     .sponsor-bands { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: 1fr; }
     .team-card.featured { grid-template-columns: 1fr; }
@@ -947,6 +950,106 @@
     .bp-spec-row { grid-template-columns: repeat(2,1fr); }
     .bp-video-inner { padding: 0 24px; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    /* Override inline grid styles */
+    [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns: repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+    [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+    [style*="grid-template-columns:1fr 2fr 1fr"] { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 32px !important; }
+    [style*="grid-template-columns:repeat(2,1fr)"] { grid-template-columns: 1fr !important; }
+    [style*="flex:0 0 480px"] { flex: 1 1 100% !important; }
+    [style*="padding:64px 48px"] { padding: 40px 24px !important; }
+    /* Nav — hide links, show logo only */
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .nav-logo { font-size: 11px; letter-spacing: 0.12em; }
+
+    /* Hero */
+    .hero { padding: 0 20px 48px; min-height: 100svh; }
+    .hero-title { font-size: clamp(48px, 14vw, 72px) !important; }
+    .hero-subtitle { font-size: 16px !important; }
+    .globe-svg { width: 64px !important; height: 64px !important; }
+
+    /* Hero meta — stack vertically */
+    .hero-meta { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .hero-divider { width: 40px; height: 1px; }
+    .hero-meta-value { font-size: 18px; }
+    .hero-scroll { display: none; }
+
+    /* Sections — tighter padding */
+    .section-inner { padding: 0 20px; }
+    .thesis, .diff, .host, .oceanco, .episodes, .board, .roadmap, .distrib, .bp-video, .team, .cta {
+      padding: 72px 0;
+    }
+
+    /* Thesis */
+    .thesis-layout { grid-template-columns: 1fr !important; gap: 28px; }
+    .thesis-headline { font-size: 28px !important; }
+    .thesis-text { font-size: 14px; }
+
+    /* Differentiators */
+    .diff-header { flex-direction: column !important; gap: 24px !important; align-items: flex-start !important; }
+    .diff-header > div:last-child { flex: unset !important; width: 100% !important; aspect-ratio: 16/9; }
+    .diff-title { font-size: clamp(40px, 12vw, 64px) !important; }
+    .diff-grid { grid-template-columns: 1fr !important; }
+    .diff-card { padding: 32px 24px; }
+    .diff-card-num { font-size: 56px; }
+
+    /* Host */
+    .host-layout { grid-template-columns: 1fr !important; gap: 40px; }
+    .host-headline { font-size: clamp(40px, 12vw, 64px) !important; }
+    .host-stats { grid-template-columns: repeat(3, 1fr); }
+    .host-stat { padding: 20px 12px; }
+    .host-stat-n { font-size: 28px; }
+    .host-card { padding: 28px 24px; }
+    .host-card-quote { font-size: 16px; }
+
+    /* OceanCo */
+    .oceanco-headline { font-size: clamp(40px, 12vw, 64px) !important; }
+    .oceanco-facts { grid-template-columns: repeat(2, 1fr) !important; }
+    .oceanco-fact { padding: 28px 20px; }
+    .oceanco-fact-n { font-size: 32px; }
+    .oceanco-pillars { grid-template-columns: 1fr !important; }
+
+    /* Distribution */
+    .distrib-headline { font-size: clamp(40px, 12vw, 64px) !important; }
+    .distrib-grid { grid-template-columns: 1fr !important; }
+    .distrib-card { padding: 32px 24px; }
+
+    /* Team grid */
+    .team-grid { grid-template-columns: 1fr !important; }
+    .team-card.featured { grid-template-columns: 1fr !important; }
+    .team-card.featured .team-img-wrap { min-height: 200px; }
+    .team-card.featured .team-body { padding: 28px 24px; }
+    .team-card.featured .team-name { font-size: 32px !important; }
+
+    /* Black Pearl video */
+    .bp-video-inner { padding: 0 20px !important; }
+    .bp-video-grid { grid-template-columns: 1fr !important; }
+    .bp-spec-row { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* CTA */
+    .cta { padding: 96px 0 72px; }
+    .cta-headline { font-size: clamp(40px, 12vw, 72px) !important; }
+    .cta-sub { font-size: 17px; }
+    .cta-actions { flex-direction: column; gap: 12px; }
+    .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+
+    /* Footer */
+    footer { padding: 32px 20px; flex-direction: column; gap: 16px; text-align: center; }
+
+    /* Roadmap */
+    .roadmap-phases { grid-template-columns: 1fr !important; gap: 32px; }
+    .roadmap-line { display: none; }
+
+    /* Sponsor bands */
+    .sponsor-bands { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
