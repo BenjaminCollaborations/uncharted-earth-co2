@@ -179,6 +179,9 @@
     background: linear-gradient(to bottom, var(--gray-mid), transparent);
     animation: scrollLine 2s ease-in-out infinite;
   }
+  @keyframes globeFadeIn {
+    to { opacity: 1; transform: scale(1); }
+  }
   @keyframes scrollLine {
     0% { transform: scaleY(0); transform-origin: top; opacity: 0; }
     50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
@@ -950,7 +953,24 @@
     <span style="width:32px;height:1px;background:var(--accent);flex-shrink:0;"></span>
     A Social-First Franchise Built for Premium TV
   </div>
-  <h1 class="hero-title fade-up fade-up-delay-1" style="line-height:0.88;">EARTH<br><em>UNCHARTED</em></h1>
+  <div class="fade-up fade-up-delay-1" style="display:flex;align-items:center;gap:32px;margin-bottom:32px;">
+    <svg class="globe-logo" width="120" height="120" viewBox="0 0 144 144" style="flex-shrink:0;opacity:0;transform:scale(0.9);animation:globeFadeIn 1s ease-out 0.3s forwards;">
+    <defs><clipPath id="gc"><circle cx="72" cy="72" r="68"/></clipPath></defs>
+    <circle cx="72" cy="72" r="68" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <g clip-path="url(#gc)">
+      <line x1="4" y1="72" x2="140" y2="72" fill="none" stroke="#fff" stroke-width="0.7"/>
+      <ellipse cx="72" cy="72" rx="68" ry="14" fill="none" stroke="#fff" stroke-width="0.8"/>
+      <ellipse cx="72" cy="72" rx="68" ry="36" fill="none" stroke="#fff" stroke-width="0.7"/>
+      <ellipse cx="72" cy="72" rx="68" ry="58" fill="none" stroke="#fff" stroke-width="0.7"/>
+      <ellipse cx="72" cy="50" rx="68" ry="16" fill="none" stroke="#fff" stroke-width="0.55"/>
+      <ellipse cx="72" cy="94" rx="68" ry="16" fill="none" stroke="#fff" stroke-width="0.55"/>
+      <ellipse cx="72" cy="72" rx="22" ry="68" fill="none" stroke="#fff" stroke-width="0.8"/>
+      <ellipse cx="72" cy="72" rx="54" ry="68" fill="none" stroke="#fff" stroke-width="0.7"/>
+      <line x1="72" y1="4" x2="72" y2="140" fill="none" stroke="#fff" stroke-width="0.75"/>
+    </g>
+  </svg>
+    <h1 class="hero-title" style="line-height:0.88;margin-bottom:0;">EARTH<br><em>UNCHARTED</em></h1>
+  </div>
   <div class="fade-up fade-up-delay-1" style="display:flex;align-items:center;gap:20px;margin-bottom:8px;">
     <span style="width:40px;height:1px;background:var(--accent);flex-shrink:0;"></span>
     <span style="font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.4vw,30px);color:var(--accent);letter-spacing:0.05em;">Oceans Company</span>
