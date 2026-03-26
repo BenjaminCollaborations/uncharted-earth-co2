@@ -1,0 +1,14 @@
+{
+  "name": "uncharted-earth-co2",
+  "version": "1.0.0",
+  "description": "Earth Uncharted: Ocean's Company — A Bill Springer Series",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.12"
+  }
+}
