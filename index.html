@@ -917,6 +917,8 @@
     .roadmap-phases { grid-template-columns: 1fr 1fr; gap: 40px; }
     .roadmap-line { display: none; }
     .distrib-grid { grid-template-columns: 1fr; }
+    .diff-header { flex-direction: column !important; }
+    .diff-header > div:last-child { flex: 1 1 100% !important; width: 100% !important; }
     .sponsor-bands { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: 1fr; }
     .team-card.featured { grid-template-columns: 1fr; }
@@ -1036,7 +1038,7 @@
 <!-- DIFFERENTIATORS -->
 <section class="diff">
   <div class="section-inner">
-    <div class="diff-header">
+    <div class="diff-header" style="display:flex;justify-content:space-between;align-items:flex-start;gap:60px;">
       <div>
         <div class="section-label fade-up">Earth Uncharted · Why This Is Different</div>
         <h2 class="diff-title fade-up">NOT<br>ANOTHER<br><em>OCEAN</em><br>SHOW</h2>
