@@ -1020,20 +1020,33 @@
     .nav-hamburger { display: flex; }
     .nav-logo { font-size: 10px; letter-spacing: 0.1em; }
 
-    /* Hero — show full Black Pearl, slow pan right on scroll */
-    .hero { padding: 0 20px 48px; min-height: 100svh; }
+    /* Hero — full 16:9 image, no crop, content below */
+    .hero {
+      padding: 0 20px 40px;
+      min-height: auto;
+      justify-content: flex-start;
+      padding-top: 56.25vw; /* 16:9 aspect ratio space for image */
+    }
     .hero-bg {
-      background-position: right center;
-      background-size: 180% auto;
-      background-attachment: scroll;
-      transition: background-position 0s;
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 56.25vw; /* 16:9 */
+      bottom: auto;
+      background-size: cover;
+      background-position: center center;
     }
     .hero-bg::after {
-      background: linear-gradient(180deg, rgba(8,8,8,0.45) 0%, rgba(8,8,8,0.05) 25%, rgba(8,8,8,0.15) 50%, rgba(8,8,8,0.82) 80%, rgba(8,8,8,0.95) 100%) !important;
+      background: linear-gradient(180deg, 
+        rgba(8,8,8,0) 0%, 
+        rgba(8,8,8,0) 40%, 
+        rgba(8,8,8,0.6) 70%, 
+        rgba(8,8,8,1) 100%
+      ) !important;
     }
-    .hero-title { font-size: clamp(48px, 14vw, 72px) !important; }
-    .hero-subtitle { font-size: 16px !important; }
-    .globe-svg { width: 0.6em !important; height: 0.6em !important; }
+    .hero-grid-lines { display: none; }
+    .hero-title { font-size: clamp(44px, 13vw, 68px) !important; }
+    .hero-subtitle { font-size: 15px !important; }
+    .globe-svg { width: 0.55em !important; height: 0.55em !important; }
 
     /* Hero meta — stack vertically */
     .hero-meta { flex-direction: column; align-items: flex-start; gap: 16px; }
@@ -1901,18 +1914,7 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Hero parallax — pan across Black Pearl image on scroll (mobile)
-  const heroBg = document.querySelector('.hero-bg');
-  if (heroBg && window.innerWidth <= 600) {
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const heroH = document.querySelector('.hero').offsetHeight;
-      const progress = Math.min(scrollY / heroH, 1);
-      // Pan from right (showing helicopter) to center as user scrolls
-      const xPos = 100 - (progress * 60);
-      heroBg.style.backgroundPosition = xPos + '% center';
-    }, { passive: true });
-  }
+
 </script>
 </body>
 </html>
