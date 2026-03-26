@@ -73,6 +73,55 @@
   }
   .nav-links a:hover { color: var(--white); }
 
+  /* Hamburger button — hidden on desktop */
+  .nav-hamburger {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    flex-direction: column; gap: 5px;
+    padding: 8px; position: relative; z-index: 101;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--white); transition: all 0.3s ease;
+  }
+
+  /* Mobile menu overlay */
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(8,8,8,0.97);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.35s cubic-bezier(0.2,0,0,1);
+  }
+  .mobile-menu.open { opacity: 1; pointer-events: auto; }
+  .mobile-menu a {
+    font-family: var(--display);
+    font-size: clamp(32px, 8vw, 48px);
+    letter-spacing: 0.06em;
+    color: var(--white);
+    text-decoration: none;
+    padding: 12px 0;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s;
+  }
+  .mobile-menu.open a {
+    opacity: 1; transform: translateY(0);
+  }
+  .mobile-menu.open a:nth-child(2) { transition-delay: 0.08s; }
+  .mobile-menu.open a:nth-child(3) { transition-delay: 0.14s; }
+  .mobile-menu.open a:nth-child(4) { transition-delay: 0.2s; }
+  .mobile-menu.open a:nth-child(5) { transition-delay: 0.26s; }
+  .mobile-menu a:active { color: var(--accent); }
+  .mobile-menu-close {
+    position: absolute; top: 20px; right: 24px;
+    background: none; border: none;
+    color: var(--white); font-size: 32px;
+    cursor: pointer; line-height: 1;
+    padding: 8px;
+  }
+
   /* SECTIONS */
   section { position: relative; }
 
@@ -965,15 +1014,23 @@
     [style*="grid-template-columns:repeat(2,1fr)"] { grid-template-columns: 1fr !important; }
     [style*="flex:0 0 480px"] { flex: 1 1 100% !important; }
     [style*="padding:64px 48px"] { padding: 40px 24px !important; }
-    /* Nav — hide links, show logo only */
+    /* Nav — hamburger on mobile */
     nav { padding: 16px 20px; }
     .nav-links { display: none; }
-    .nav-logo { font-size: 11px; letter-spacing: 0.12em; }
+    .nav-hamburger { display: flex; }
+    .nav-logo { font-size: 10px; letter-spacing: 0.1em; }
 
-    /* Hero */
+    /* Hero — show full Black Pearl, slow pan right on scroll */
     .hero { padding: 0 20px 48px; min-height: 100svh; }
-    .hero-bg { background-position: 60% center; background-size: cover; }
-    .hero-bg::after { background: linear-gradient(180deg, rgba(8,8,8,0.5) 0%, rgba(8,8,8,0.1) 30%, rgba(8,8,8,0.85) 75%, rgba(8,8,8,0.95) 100%), radial-gradient(ellipse at 20% 50%, rgba(200,169,110,0.06) 0%, transparent 60%) !important; }
+    .hero-bg {
+      background-position: right center;
+      background-size: 180% auto;
+      background-attachment: scroll;
+      transition: background-position 0s;
+    }
+    .hero-bg::after {
+      background: linear-gradient(180deg, rgba(8,8,8,0.45) 0%, rgba(8,8,8,0.05) 25%, rgba(8,8,8,0.15) 50%, rgba(8,8,8,0.82) 80%, rgba(8,8,8,0.95) 100%) !important;
+    }
     .hero-title { font-size: clamp(48px, 14vw, 72px) !important; }
     .hero-subtitle { font-size: 16px !important; }
     .globe-svg { width: 0.6em !important; height: 0.6em !important; }
@@ -1066,7 +1123,19 @@
     <li><a href="#team">The Team</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" aria-label="Menu" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu">
+  <button class="mobile-menu-close" aria-label="Close" onclick="this.parentElement.classList.remove('open')">&times;</button>
+  <a href="#thesis" onclick="this.parentElement.classList.remove('open')">The Series</a>
+  <a href="#host" onclick="this.parentElement.classList.remove('open')">The Host</a>
+  <a href="#team" onclick="this.parentElement.classList.remove('open')">The Team</a>
+  <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1797,6 +1866,19 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Hero parallax — pan across Black Pearl image on scroll (mobile)
+  const heroBg = document.querySelector('.hero-bg');
+  if (heroBg && window.innerWidth <= 600) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const heroH = document.querySelector('.hero').offsetHeight;
+      const progress = Math.min(scrollY / heroH, 1);
+      // Pan from right (showing helicopter) to center as user scrolls
+      const xPos = 100 - (progress * 60);
+      heroBg.style.backgroundPosition = xPos + '% center';
+    }, { passive: true });
+  }
 </script>
 </body>
 </html>
