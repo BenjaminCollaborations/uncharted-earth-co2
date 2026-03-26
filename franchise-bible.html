@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earth Uncharted — Franchise Bible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-display: 'Bebas Neue', sans-serif;
+
+    --bg-primary: #1c1c1a;
+    --bg-secondary: #242422;
+    --bg-info: #0c1f35;
+    --bg-warning: #2a1a06;
+    --bg-danger: #2a1010;
+    --bg-success: #101f0a;
+
+    --text-primary: #e8e7e0;
+    --text-secondary: #a09e97;
+    --text-muted: #706e68;
+    --text-info: #85b7eb;
+    --text-warning: #fac775;
+    --text-danger: #f09595;
+    --text-success: #97c459;
+
+    --border-light: rgba(255,255,255,0.08);
+    --border-mid: rgba(255,255,255,0.15);
+    --border-info: rgba(133,183,235,0.35);
+    --border-danger: rgba(240,149,149,0.35);
+
+    --accent: #c8a96e;
+
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 2rem 1rem 4rem;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* BACK LINK */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: opacity 0.2s;
+  }
+  .back-link:hover { opacity: 0.7; }
+  .back-link::before { content: '\2190'; font-size: 14px; }
+
+  /* HERO */
+  .hero {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2.25rem 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0A2540, #C8922A, #A63D2F, #C8DFF0);
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .franchise-title {
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 0.92;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+  }
+
+  .franchise-subtitle {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    margin-bottom: 1.75rem;
+  }
+
+  .logline-box {
+    border-left: 3px solid var(--border-info);
+    padding: 1rem 1.25rem;
+    background: var(--bg-info);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-bottom: 1.75rem;
+  }
+
+  .logline-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-info);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+
+  .logline-text {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-primary);
+  }
+
+  /* SEASON GRID */
+  .season-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 560px) { .season-grid { grid-template-columns: 1fr; } }
+
+  .season-card {
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    background: var(--bg-secondary);
+  }
+
+  .season-num {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .season-name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    line-height: 1.05;
+    margin-bottom: 0.35rem;
+  }
+
+  .season-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+    position: relative; top: -1px;
+  }
+
+  /* DIVIDER */
+  hr {
+    border: none;
+    border-top: 0.5px solid var(--border-light);
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+  }
+
+  /* EPISODE BLOCKS */
+  .episode-block {
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    background: var(--bg-primary);
+  }
+
+  .ep-header {
+    padding: 1.25rem 1.5rem 1rem;
+    border-bottom: 0.5px solid var(--border-light);
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .ep-num {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 400;
+    color: var(--border-mid);
+    flex-shrink: 0;
+    line-height: 1;
+    padding-top: 3px;
+  }
+
+  .ep-meta { flex: 1; }
+
+  .ep-tag {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .ep-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    line-height: 1.05;
+    margin-bottom: 0.4rem;
+  }
+
+  .ep-logline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  .ep-body { padding: 1.25rem 1.5rem; }
+
+  .ep-vibe {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--text-warning);
+    background: var(--bg-warning);
+    border-radius: 20px;
+    padding: 3px 11px;
+    margin-bottom: 1rem;
+  }
+
+  .beat-list { list-style: none; }
+
+  .beat-list li {
+    display: flex;
+    gap: 12px;
+    padding: 0.65rem 0;
+    border-bottom: 0.5px solid var(--border-light);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-primary);
+  }
+
+  .beat-list li:last-child { border-bottom: none; }
+
+  .beat-icon {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    margin-top: 3px;
+    color: var(--text-muted);
+  }
+
+  .beat-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .cliffhanger {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    border-left: 2px solid var(--border-danger);
+    background: var(--bg-danger);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .cliffhanger-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-danger);
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+  }
+
+  .cliffhanger-text {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-primary);
+  }
+
+  /* GABE ARC */
+  .gabe-arc {
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .arc-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .arc-badge {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--bg-info);
+    color: var(--text-info);
+    border-radius: 20px;
+    padding: 4px 12px;
+  }
+
+  .gabe-ep-row {
+    display: flex;
+    gap: 12px;
+    padding: 0.9rem 0;
+    border-bottom: 0.5px solid var(--border-light);
+    align-items: flex-start;
+  }
+
+  .gabe-ep-row:last-child { border-bottom: none; }
+
+  .gabe-ep-num {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--text-muted);
+    min-width: 36px;
+    line-height: 1.2;
+  }
+
+  .gabe-ep-content { flex: 1; }
+
+  .gabe-ep-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .gabe-ep-body {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .gabe-ep-vibe {
+    font-size: 11px;
+    color: var(--text-success);
+    background: var(--bg-success);
+    border-radius: 12px;
+    padding: 2px 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+    height: fit-content;
+  }
+
+  /* FRAMEWORK */
+  .framework-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 480px) { .framework-grid { grid-template-columns: 1fr; } }
+
+  .fw-card {
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    background: var(--bg-primary);
+  }
+
+  .fw-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .fw-body {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .doc-footer {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+
+  .footer-right {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 560px) {
+    .hero { padding: 2rem 1.5rem 1.5rem; }
+    .franchise-title { font-size: 44px; }
+    .ep-header { flex-direction: column; gap: 0.5rem; }
+    .ep-body { padding: 1rem; }
+    .ep-title { font-size: 22px; }
+    .gabe-ep-row { flex-wrap: wrap; }
+    .gabe-ep-vibe { margin-top: 6px; }
+    .doc-footer { flex-direction: column; gap: 12px; text-align: center; }
+    .footer-right { text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <a href="index.html" class="back-link">Back to Earth Uncharted</a>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="eyebrow">Franchise Bible &middot; Board of Advisors Cut &middot; Confidential</p>
+    <h1 class="franchise-title">EARTH<br>UNCHARTED</h1>
+    <p class="franchise-subtitle">From the producing team behind Life Below Zero &amp; Pole to Pole</p>
+
+    <div class="logline-box">
+      <p class="logline-label">Series Logline</p>
+      <p class="logline-text">The world&rsquo;s greatest explorers don&rsquo;t just go places &mdash; they <em>build</em> the tools, forge the teams, and make the decisions that let them reach where no camera has ever been. <em>Earth Uncharted</em> follows the scientists, engineers, guides, and visionaries who refuse to accept that any part of this planet is beyond reach &mdash; and shows us, in real time, what it truly costs to get there.</p>
+    </div>
+
+    <div class="season-grid">
+      <div class="season-card">
+        <p class="season-num">Season 01</p>
+        <p class="season-name">OCEANS COMPANY</p>
+        <p class="season-desc"><span class="dot" style="background:#1A6CA8;"></span>Open ocean &middot; Antarctica &middot; Deep sea</p>
+      </div>
+      <div class="season-card">
+        <p class="season-num">Season 02</p>
+        <p class="season-name">LAND&rsquo;S END</p>
+        <p class="season-desc"><span class="dot" style="background:#5B3A29;"></span>Deserts &middot; Poles &middot; Extreme altitude</p>
+      </div>
+      <div class="season-card">
+        <p class="season-num">Season 03</p>
+        <p class="season-name">LOST IN THE JUNGLE</p>
+        <p class="season-desc"><span class="dot" style="background:#2D6A4F;"></span>Rainforest &middot; Cave systems &middot; Rivers</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILOT EPISODES -->
+  <p class="section-label">Pilot Season &middot; Oceans Company &middot; Featuring Bill Springer &amp; Gabe Newell</p>
+
+  <!-- EP 1 -->
+  <div class="episode-block">
+    <div class="ep-header">
+      <div class="ep-num">01</div>
+      <div class="ep-meta">
+        <p class="ep-tag">Episode 01 &middot; &ldquo;The Build&rdquo;</p>
+        <h2 class="ep-title">Steel, Salt &amp; Submarines</h2>
+        <p class="ep-logline">Before any ship touches the sea, someone has to build it right. We spend a week inside Ocean Co&rsquo;s shipyard &mdash; and learn that every great expedition starts not on the water, but on the floor of a very loud factory.</p>
+      </div>
+    </div>
+    <div class="ep-body">
+      <span class="ep-vibe">Vibe: Discovery Channel meets Formula 1 garage</span>
+      <ul class="beat-list">
+        <li>
+          <div class="beat-icon">&#9650;</div>
+          <div>
+            <span class="beat-label">Opening Hook</span>
+            Cold open on a submarine being lowered into the hull of a ship under construction. We hear Bill Springer&rsquo;s voice over radio comms: <em>&ldquo;If this fails at 600 meters, there&rsquo;s no rescue team coming.&rdquo;</em> Cut to title card.
+          </div>
+        </li>
+        <li>
+          <div class="beat-icon">&#9679;</div>
+          <div>
+            <span class="beat-label">Act 1 &middot; The Shipyard</span>
+            We arrive at Ocean Co&rsquo;s facility. Bill walks us through what he calls &ldquo;the philosophy wall&rdquo; &mdash; a whiteboard covered in principles: crew-first layout, modular systems, zero single points of failure. We meet the lead naval architect, the dive systems engineer, and the chef who helped redesign the galley because morale is a survival tool.
+          </div>
+        </li>
+        <li>
+          <div class="beat-icon">&#9679;</div>
+          <div>
+            <span class="beat-label">Act 2 &middot; The Toys</span>
+            Bill reveals what makes this vessel different: a 3-person submersible rated to 1,000m, a drone squadron for surface mapping, a wet lab for real-time specimen analysis, and an AI-assisted navigation suite that predicts ice formation 72 hours out. We show how each piece is installed, tested, and integrated &mdash; the unglamorous choreography of making exploration actually work.
+          </div>
+        </li>
+        <li>
+          <div class="beat-icon">&#9679;</div>
+          <div>
+            <span class="beat-label">Act 3 &middot; First Light</span>
+            The ship is floated for the first time. Dockside ceremonies are skipped &mdash; Bill&rsquo;s team runs a full systems check instead. Every alarm is a lesson. A hydraulic fault on the A-frame crane delays the sub deployment by 36 hours. We watch the team solve it in real time. No drama. Just problem-solving.
+          </div>
+        </li>
+      </ul>
+      <div class="cliffhanger">
+        <p class="cliffhanger-label">Cliffhanger</p>
+        <p class="cliffhanger-text">The crane is fixed. The sub goes in the water for the first time. At 40 meters, the depth gauge gives a reading that shouldn&rsquo;t be possible. Bill says nothing. He just looks at the dive supervisor and writes one word on the whiteboard: <em>Antarctica.</em></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 2 -->
+  <div class="episode-block">
+    <div class="ep-header">
+      <div class="ep-num">02</div>
+      <div class="ep-meta">
+        <p class="ep-tag">Episode 02 &middot; &ldquo;The Plan&rdquo;</p>
+        <h2 class="ep-title">Maiden Voyage: Mission Briefing</h2>
+        <p class="ep-logline">Planning an expedition to one of Earth&rsquo;s most hostile environments isn&rsquo;t done in a boardroom. It&rsquo;s done in the engine room, the galley, and in long conversations about what could go wrong &mdash; and what you do when it does.</p>
+      </div>
+    </div>
+    <div class="ep-body">
+      <span class="ep-vibe">Vibe: War room meets wilderness prep school</span>
+      <ul class="beat-list">
+        <li>
+          <div class="beat-icon">&#9650;</div>
+          <div>
+            <span class="beat-label">Opening Hook</span>
+            Bill unfolds a satellite image of the Amundsen Sea on the chart table. Across it, in red marker: the route. A glaciologist leans in and circles one section &mdash; <em>&ldquo;No one&rsquo;s done a surface survey here. There&rsquo;s a reason for that.&rdquo;</em>
+          </div>
+        </li>
+        <li>
+          <div class="beat-icon">&#9679;</div>
+          <div>
+            <span class="beat-label">Act 1 &middot; The Team Assembly</span>
+            We follow Bill as he assembles his crew: a glaciologist from the British Antarctic Survey, a deep-sea biologist who&rsquo;s logged more sub hours than anyone alive, a documentary cinematographer who films at 2,000 meters, and two local Patagonian guides who know ice behavior that no instrument measures. Bill explains his non-negotiable hiring principle: <em>ego is a weight penalty.</em>
+          </div>
+        </li>
+        <li>
+          <div class="beat-icon">&#9679;</div>
+          <div>
+            <span class="beat-label">Act 2 &middot; The Planning Architecture</span>
+            We spend time with the expedition planner mapping out the 47-day voyage &mdash; not just routing, but contingency trees: what if we lose comms, lose a propeller, lose a team member to injury. The production design of the ship&rsquo;s ops center is a character in itself. Every screen, every whiteboard is tracked.
+          </div>
+        </li>
+        <li>
+          <div class="beat-icon">&#9679;</div>
+          <div>
+            <span class="beat-label">Act 3 &middot; Departure</span>
+            The maiden voyage departs from Ushuaia. No fanfare. Bill walks the ship once &mdash; stem to stern &mdash; alone, at 5am, before anyone is awake. We follow him with a single camera. He touches the hull and says: <em>&ldquo;She&rsquo;s ready. I think.&rdquo;</em>
+          </div>
+        </li>
+      </ul>
+      <div class="cliffhanger">
+        <p class="cliffhanger-label">Cliffhanger</p>
+        <p class="cliffhanger-text">Day 6 at sea. The ship&rsquo;s AI nav flags an anomaly in the pack ice 200 miles ahead &mdash; a gap that shouldn&rsquo;t exist in March. The glaciologist pulls up her models and goes quiet for a long moment. Then: <em>&ldquo;We need to go look at that.&rdquo;</em></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 3 -->
+  <div class="episode-block">
+    <div class="ep-header">
+      <div class="ep-num">03</div>
+      <div class="ep-meta">
+        <p class="ep-tag">Episode 03 &middot; &ldquo;The Edge&rdquo;</p>
+        <h2 class="ep-title">Getting to Antarctica: Skis, Subs &amp; the Silence</h2>
+        <p class="ep-logline">Antarctica doesn&rsquo;t welcome you. It tolerates you &mdash; briefly, conditionally, and on its own terms. Bill&rsquo;s team arrives at the ice shelf and deploys every tool they have: skis on the surface, a submarine below it, and human judgment threading both.</p>
+      </div>
+    </div>
+    <div class="ep-body">
+      <span class="ep-vibe">Vibe: Planet Earth meets The Revenant</span>
+      <ul class="beat-list">
+        <li>
+          <div class="beat-icon">&#9650;</div>
+          <div>
+            <span class="beat-label">Opening Hook</span>
+            Aerial drone footage of the ship, a small orange dot in an infinite white-and-grey seascape. The sub is in the water below it, a yellow tube descending into darkness. We cut between both worlds simultaneously &mdash; 30 meters of sea ice separating two film crews.
+          </div>
+        </li>
+        <li>
+          <div class="beat-icon">&#9679;</div>
+          <div>
+            <span class="beat-label">Act 1 &middot; Surface Operations</span>
+            The ski team deploys from the ship&rsquo;s stern onto the ice shelf &mdash; a kilometer-wide platform of floating ice that could calve at any moment. The Patagonian guides read the ice surface the way a navigator reads a chart: color, texture, sound. They find a pressure ridge that marks an unexplored glacial meltwater channel running beneath the shelf.
+          </div>
+        </li>
+        <li>
+          <div class="beat-icon">&#9679;</div>
+          <div>
+            <span class="beat-label">Act 2 &middot; Below the Ice</span>
+            The sub team descends beneath the shelf to find the underside &mdash; a cathedral of translucent blue ice, 40 meters thick above them. The biologist discovers a colony of organisms living on the ice&rsquo;s underside that the team&rsquo;s preliminary research suggested couldn&rsquo;t survive there. The cameras roll for 14 minutes without anyone speaking.
+          </div>
+        </li>
+        <li>
+          <div class="beat-icon">&#9679;</div>
+          <div>
+            <span class="beat-label">Act 3 &middot; The Convergence</span>
+            Surface and sub teams compare notes via encrypted comms. What they find &mdash; from above and below &mdash; maps the same 4-kilometer shelf section in a way no satellite ever has. Bill coordinates both teams from the ship&rsquo;s ops center, never raising his voice. The crew realizes they&rsquo;ve just produced the most complete survey of this shelf in history.
+          </div>
+        </li>
+      </ul>
+      <div class="cliffhanger">
+        <p class="cliffhanger-label">Cliffhanger</p>
+        <p class="cliffhanger-text">A satellite call comes in mid-operation. A tech billionaire&rsquo;s team is on the line &mdash; they&rsquo;ve seen the ship&rsquo;s transponder. They want to talk about buying Ocean Co. Bill mutes the call and goes back to the ops board. But later, over dinner, he says one thing: <em>&ldquo;There&rsquo;s one person who&rsquo;d actually know what to build next. And I think he&rsquo;s already on a boat somewhere.&rdquo;</em></p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- GABE ARC -->
+  <div class="gabe-arc">
+    <div class="arc-header">
+      <p class="section-label" style="margin:0">Episodes 04&ndash;07</p>
+      <span class="arc-badge">The Gabe Newell Arc</span>
+    </div>
+    <p style="font-size:13.5px;color:var(--text-secondary);line-height:1.65;margin-bottom:1.25rem;">The second half of Season 1 expands the show&rsquo;s scope &mdash; and its ambition. Gabe Newell enters not as a celebrity cameo but as a genuine protagonist: a builder who is bored, brilliant, and about to do something the maritime world has never seen.</p>
+
+    <div class="gabe-ep-row">
+      <div class="gabe-ep-num">04</div>
+      <div class="gabe-ep-content">
+        <p class="gabe-ep-title">&ldquo;The Patch Notes&rdquo; &mdash; Gabe buys the studio</p>
+        <p class="gabe-ep-body">Gabe Newell appears at Ocean Co&rsquo;s shipyard in the Netherlands &mdash; uninvited, unannounced, carrying a single notebook. He&rsquo;s been living aboard a vessel in the Marlborough Sounds running Valve remotely and has one obsession: yachts are built for show, not work. He pitches Project Y722, the Leviathan, to Ocean Co&rsquo;s Dutch builders &mdash; a floating research lab with flat-hierarchy management and 3D printing bays. During sea trials, a structural flaw surfaces. Gabe doesn&rsquo;t get angry. He makes an offer to buy the company. The Dutch don&rsquo;t know whether to laugh or call their lawyers.</p>
+      </div>
+      <span class="gabe-ep-vibe">Tech Thriller</span>
+    </div>
+
+    <div class="gabe-ep-row">
+      <div class="gabe-ep-num">05</div>
+      <div class="gabe-ep-content">
+        <p class="gabe-ep-title">&ldquo;Full Ocean Depth&rdquo; &mdash; Into the Tonga Trench</p>
+        <p class="gabe-ep-body">Now running Ocean Co, Gabe integrates Starfish Neuroscience and Inkfish marine research into the shipyard&rsquo;s mission. The episode centers on building Leviathan&rsquo;s submersible &mdash; a sphere of ALON (transparent aluminum) rated to full ocean depth. His &ldquo;crew-first&rdquo; design philosophy gives the ship&rsquo;s chef and deckhand veto power over the interior layout. Old-guard investors are horrified. To prove the sub works, Gabe insists on piloting the first deep dive himself &mdash; into the Tonga Trench at 6,000 meters. Communications go silent.</p>
+      </div>
+      <span class="gabe-ep-vibe">Exploration</span>
+    </div>
+
+    <div class="gabe-ep-row">
+      <div class="gabe-ep-num">06</div>
+      <div class="gabe-ep-content">
+        <p class="gabe-ep-title">&ldquo;The Open World&rdquo; &mdash; Monaco &amp; the manifesto</p>
+        <p class="gabe-ep-body">Gabe surfaces. The Leviathan is delivered. The yacht world descends on Monaco expecting a party. Gabe gives them a lecture on airborne pathogen detection, open-source shipbuilding, and why the next great exploration vessel should be crowd-designed. He announces that Ocean Co will no longer build floating status symbols &mdash; only tools for species survival. The yachting establishment is outraged. Bill Springer watches from the back of the room, smiling. The Leviathan sails south. In the server room, Gabe opens a terminal and starts typing.</p>
+      </div>
+      <span class="gabe-ep-vibe">Visionary</span>
+    </div>
+
+    <div class="gabe-ep-row">
+      <div class="gabe-ep-num">07</div>
+      <div class="gabe-ep-content">
+        <p class="gabe-ep-title">&ldquo;New Game+&rdquo; &mdash; The future is open source</p>
+        <p class="gabe-ep-body">Season finale. The Leviathan joins Bill&rsquo;s Ocean Co vessel in Antarctic waters &mdash; the first coordinated dual-ship deep exploration in the region. Gabe and Bill together map the same glacial shelf from above and below using Leviathan&rsquo;s AI seafloor system and Bill&rsquo;s submarine. What they find rewrites the geological record of that section of the shelf. In the last scene, Gabe releases the ship&rsquo;s entire design blueprint &mdash; hull, AI nav, sub specs &mdash; on a public server. Free. Open source. A new class of explorer can now build this. Final frame: the two ships disappear into the fog, heading further south.</p>
+      </div>
+      <span class="gabe-ep-vibe">Season Finale</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- FRANCHISE DNA -->
+  <p class="section-label">Franchise DNA &mdash; What Makes Earth Uncharted Different</p>
+  <div class="framework-grid">
+    <div class="fw-card">
+      <p class="fw-title">The Build Is the Show</p>
+      <p class="fw-body">Every season starts before departure. We film the planning, the arguments, the gear failures, the team selection. The build is not preamble &mdash; it is the story.</p>
+    </div>
+    <div class="fw-card">
+      <p class="fw-title">Aspirational Education</p>
+      <p class="fw-body">Viewers learn how real exploration actually works &mdash; navigation, logistics, biology, engineering. We never dumb it down. We make it thrilling.</p>
+    </div>
+    <div class="fw-card">
+      <p class="fw-title">Crew-First Storytelling</p>
+      <p class="fw-body">The chef, the rigger, the local guide &mdash; they&rsquo;re not background. They&rsquo;re protagonists. Leadership is shown through relationships, not titles.</p>
+    </div>
+    <div class="fw-card">
+      <p class="fw-title">Tools as Characters</p>
+      <p class="fw-body">The sub, the ski, the AI nav system &mdash; each piece of technology gets its own arc. We show what it took to build it and what happens when it fails.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span class="footer-left">EARTH UNCHARTED</span>
+    <div class="footer-right">
+      Franchise Bible &middot; Season 01: Oceans Company<br>
+      Board of Advisors Draft &middot; Confidential
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
